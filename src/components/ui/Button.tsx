@@ -264,7 +264,7 @@ export function Button({
       )}
 
       {/* Label */}
-      <span>{children}</span>
+      <span className="truncate max-w-full whitespace-nowrap">{children}</span>
 
       {/* Icon right */}
       {icon && iconPosition === 'right' && !isLoading && (

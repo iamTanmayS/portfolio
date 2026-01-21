@@ -31,7 +31,7 @@ export function ToastContainer() {
   const { toasts, dismissToast } = useToast();
 
   return (
-    <div className="fixed bottom-6 right-6 z-[100] flex flex-col gap-3">
+    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 md:bottom-6 md:right-6 md:left-auto md:translate-x-0 z-[100] flex flex-col gap-3 w-[calc(100vw-2rem)] max-w-[400px] md:w-auto">
       <AnimatePresence mode="popLayout">
         {toasts.map((toast) => {
           const Icon = icons[toast.type];
@@ -50,7 +50,7 @@ export function ToastContainer() {
                 damping: 30,
               }}
               className={`
-                flex items-center gap-3 px-4 py-3 min-w-[280px] max-w-[400px]
+                flex items-center gap-3 px-4 py-3
                 rounded-xl backdrop-blur-md
                 ${colorScheme.bg} ${colorScheme.border} border
                 shadow-lg
