@@ -1,183 +1,123 @@
-import { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Github, Play } from 'lucide-react';
-import { TiltCard } from './TiltCard';
+import { useRef } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
+import type { Project } from '../../data/projects';
+import { useMotion } from '../../context/AppContext';
 import { useCursorHandlers } from '../cursor/CustomCursor';
-import { IconButton } from '../ui/IconButton';
-
-export interface Project {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  video?: string;
-  techStack: string[];
-  liveUrl?: string;
-  githubUrl?: string;
-  caseStudy?: string;
-  featured?: boolean;
-}
+import { GlowCard } from '../ui/GlowCard';
+import { springs } from '../../animations';
 
 interface ProjectCardProps {
   project: Project;
   onOpenModal: (project: Project) => void;
-  index?: number;
+  index: number;
 }
 
-export function ProjectCard({ project, onOpenModal, index = 0 }: ProjectCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const cursorHandlers = useCursorHandlers('text', 'View Project');
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-    if (videoRef.current && project.video) {
-      videoRef.current.play().catch(() => {});
-    }
+export function ProjectCard({ project, onOpenModal, index }: ProjectCardProps) {
+  const { prefersReducedMotion } = useMotion();
+  const cursorHandlers = useCursorHandlers('button');
+  const cardRef = useRef<HTMLDivElement>(null);
+  
+  // 3D tilt
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+  const springRotateX = useSpring(rotateX, springs.snappy);
+  const springRotateY = useSpring(rotateY, springs.snappy);
+  
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (prefersReducedMotion || !cardRef.current) return;
+    
+    const rect = cardRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    const x = (e.clientX - centerX) / (rect.width / 2);
+    const y = (e.clientY - centerY) / (rect.height / 2);
+    
+    rotateX.set(-y * 5);
+    rotateY.set(x * 5);
   };
-
+  
   const handleMouseLeave = () => {
-    setIsHovered(false);
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
+    rotateX.set(0);
+    rotateY.set(0);
   };
+
+  const colors = ['#a78bfa', '#67e8f9', '#f9a8d4', '#34d399', '#fbbf24'];
+  const glowColor = colors[index % colors.length];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+    <GlowCard
+      layout
+      glowColor={glowColor}
+      borderRadius={16}
+      ref={cardRef}
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.3 }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onClick={() => onOpenModal(project)}
+      style={{
+        position: 'relative',
+        cursor: 'pointer',
+        transformStyle: 'preserve-3d',
+        perspective: 1000,
+        rotateX: springRotateX,
+        rotateY: springRotateY,
+      }}
+      whileHover={prefersReducedMotion ? {} : {
+        y: -4,
+        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.2)',
+      }}
+      {...cursorHandlers}
     >
-      <TiltCard tiltAmount={8} className="h-full">
-        <motion.div
-          className={`
-            relative overflow-hidden rounded-2xl
-            bg-dark-700/50 border border-zinc-800
-            hover:border-pastel-purple/30
-            transition-colors duration-300
-            ${project.featured ? 'col-span-2 row-span-2' : ''}
-          `}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          onClick={() => onOpenModal(project)}
-          {...cursorHandlers}
-        >
-          {/* Media Container */}
-          <div className="relative aspect-video overflow-hidden">
-            {/* Image */}
-            <motion.img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-full object-cover"
-              animate={{
-                scale: isHovered ? 1.05 : 1,
-                filter: isHovered ? 'brightness(0.7)' : 'brightness(1)',
+      {/* Thumbnail */}
+      <div style={{ position: 'relative', aspectRatio: '16/9', overflow: 'hidden' }}>
+        <motion.img
+          src={project.thumbnail}
+          alt={project.title}
+          loading="lazy"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          whileHover={{ scale: 1.05 }}
+          transition={springs.gentle}
+        />
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.2)' }} />
+      </div>
+
+      {/* Content */}
+      <div style={{ padding: 24 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
+          <h4 style={{ fontSize: 18, fontWeight: 600, color: '#fff', fontFamily: "'Outfit', system-ui, sans-serif" }}>
+            {project.title}
+          </h4>
+          <span style={{ fontSize: 12, color: '#71717a', fontFamily: "'JetBrains Mono', monospace" }}>
+            {project.year}
+          </span>
+        </div>
+        
+        <p style={{ fontSize: 14, color: '#a1a1aa', lineHeight: 1.6, marginBottom: 16 }}>
+          {project.tagline}
+        </p>
+
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          {project.techStack.slice(0, 3).map(tech => (
+            <span 
+              key={tech}
+              style={{ 
+                fontSize: 11, 
+                color: '#d4d4d8', 
+                background: 'rgba(255,255,255,0.05)', 
+                padding: '4px 8px', 
+                borderRadius: 4,
+                border: '1px solid rgba(255,255,255,0.05)'
               }}
-              transition={{ duration: 0.4 }}
-            />
-
-            {/* Video overlay on hover */}
-            {project.video && (
-              <AnimatePresence>
-                {isHovered && (
-                  <motion.video
-                    ref={videoRef}
-                    src={project.video}
-                    muted
-                    loop
-                    playsInline
-                    className="absolute inset-0 w-full h-full object-cover"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                )}
-              </AnimatePresence>
-            )}
-
-            {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent" />
-
-            {/* Play icon for video projects */}
-            {project.video && (
-              <motion.div
-                className="absolute inset-0 flex items-center justify-center"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: isHovered ? 0 : 1 }}
-              >
-                <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                  <Play className="w-5 h-5 text-white ml-1" />
-                </div>
-              </motion.div>
-            )}
-          </div>
-
-          {/* Content */}
-          <div className="p-5">
-            <h3 className="text-lg font-semibold text-white mb-2">
-              {project.title}
-            </h3>
-            <p className="text-sm text-zinc-400 line-clamp-2 mb-4">
-              {project.description}
-            </p>
-
-            {/* Tech Stack */}
-            <div className="flex flex-wrap gap-2 mb-4">
-              {project.techStack.slice(0, 4).map((tech) => (
-                <span
-                  key={tech}
-                  className="px-2 py-1 text-xs font-medium
-                    bg-pastel-purple/10 text-pastel-purple-light
-                    rounded-md border border-pastel-purple/20"
-                >
-                  {tech}
-                </span>
-              ))}
-              {project.techStack.length > 4 && (
-                <span className="px-2 py-1 text-xs text-zinc-500">
-                  +{project.techStack.length - 4}
-                </span>
-              )}
-            </div>
-
-            {/* Links */}
-            <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
-              {project.liveUrl && (
-                <IconButton
-                  icon={<ExternalLink />}
-                  label="Live Demo"
-                  href={project.liveUrl}
-                  external
-                  size="sm"
-                />
-              )}
-              {project.githubUrl && (
-                <IconButton
-                  icon={<Github />}
-                  label="GitHub"
-                  href={project.githubUrl}
-                  external
-                  size="sm"
-                />
-              )}
-            </div>
-          </div>
-
-          {/* Hover glow */}
-          <motion.div
-            className="absolute inset-0 pointer-events-none rounded-2xl"
-            animate={{
-              boxShadow: isHovered
-                ? 'inset 0 0 60px rgba(167, 139, 250, 0.1)'
-                : 'inset 0 0 0px transparent',
-            }}
-          />
-        </motion.div>
-      </TiltCard>
-    </motion.div>
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+    </GlowCard>
   );
 }

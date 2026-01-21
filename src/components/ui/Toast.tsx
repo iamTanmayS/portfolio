@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useToast } from '../../context/AppContext';
 import { CheckCircle, XCircle, Info, X } from 'lucide-react';
+import { IconButton } from './IconButton';
 
 const icons = {
   success: CheckCircle,
@@ -57,12 +58,14 @@ export function ToastContainer() {
             >
               <Icon className={`w-5 h-5 flex-shrink-0 ${colorScheme.icon}`} />
               <span className="flex-1 text-sm text-white">{toast.message}</span>
-              <button
+              <IconButton
+                icon={<X className="w-4 h-4" />}
+                label="Dismiss"
+                size="sm"
                 onClick={() => dismissToast(toast.id)}
-                className="p-1 text-zinc-400 hover:text-white transition-colors"
-              >
-                <X className="w-4 h-4" />
-              </button>
+                className="!text-zinc-400 hover:!text-white !bg-transparent !border-transparent hover:!bg-white/10"
+                showTooltip={false}
+              />
 
               {/* Progress bar */}
               {toast.duration && toast.duration > 0 && (

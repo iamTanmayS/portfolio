@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Github, ExternalLink, Calendar, Clock, Code2, Eye } from 'lucide-react';
 import type { Project } from '../../data/projects';
-import { useMotion } from '../../context/AppContext';
-import { Button } from '../../components/ui';
+import { Button, IconButton } from '../../components/ui';
 import { springs } from '../../animations';
 
 interface ProjectDetailModalProps {
@@ -14,7 +13,6 @@ interface ProjectDetailModalProps {
 }
 
 export function ProjectDetailModal({ project, isOpen, onClose }: ProjectDetailModalProps) {
-  const { prefersReducedMotion } = useMotion();
   const modalRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
@@ -99,27 +97,15 @@ export function ProjectDetailModal({ project, isOpen, onClose }: ProjectDetailMo
               />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #12121a, transparent)' }} />
               
-              <button
-                onClick={onClose}
-                style={{
-                  position: 'absolute',
-                  top: 24,
-                  right: 24,
-                  width: 40,
-                  height: 40,
-                  borderRadius: '50%',
-                  background: 'rgba(0, 0, 0, 0.5)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  color: '#fff',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: 'pointer',
-                  backdropFilter: 'blur(4px)',
-                }}
-              >
-                <X style={{ width: 20, height: 20 }} />
-              </button>
+              <div style={{ position: 'absolute', top: 24, right: 24, zIndex: 10 }}>
+                <IconButton
+                  icon={<X size={20} />}
+                  label="Close modal"
+                  onClick={onClose}
+                  variant="default" // or 'glass' if available, but default fits
+                  className="!bg-black/50 !backdrop-blur-sm !border-white/10 hover:!bg-black/70"
+                />
+              </div>
             </div>
 
             {/* Scrollable Content */}

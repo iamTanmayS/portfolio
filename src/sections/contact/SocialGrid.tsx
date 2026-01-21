@@ -38,56 +38,39 @@ export function SocialGrid() {
         variants={staggerItem}
         onClick={handleCopyEmail}
         {...cursorHandlers}
-        borderRadius={16}
+        borderRadius={20}
         style={{
-          padding: 32,
+          position: 'relative',
+          padding: 28,
           cursor: 'pointer',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'flex-start',
           gap: 16,
+          overflow: 'hidden',
         }}
         whileHover={{
-          scale: 1.02,
+          scale: 1.01,
+          y: -2,
         }}
         whileTap={{ scale: 0.98 }}
         transition={springs.snappy}
       >
-        <div
-          style={{
-            width: 48,
-            height: 48,
-            borderRadius: 12,
-            background: 'rgba(167, 139, 250, 0.1)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#a78bfa',
-          }}
-        >
-          <Mail size={24} />
-        </div>
-
-        <div>
-          <h3 style={{ fontSize: 14, fontWeight: 600, color: '#a78bfa', marginBottom: 4 }}>
-            Drop me an email
-          </h3>
-          <p style={{ fontSize: 24, fontWeight: 700, color: '#fff', fontFamily: "'Outfit', system-ui, sans-serif" }}>
-            hello@example.com
-          </p>
-        </div>
-
-        {/* Copy Indicator */}
+        {/* Copy Button - Top Right */}
         <div style={{ 
           position: 'absolute', 
-          top: 24, 
-          right: 24,
+          top: 20, 
+          right: 20,
           display: 'flex',
           alignItems: 'center',
           gap: 8,
-          color: copied ? '#34d399' : '#71717a',
-          fontSize: 14,
+          color: copied ? '#34d399' : '#52525b',
+          fontSize: 12,
           fontWeight: 500,
+          background: 'rgba(0,0,0,0.3)',
+          padding: '6px 12px',
+          borderRadius: 9999,
+          border: '1px solid rgba(255,255,255,0.08)',
+          zIndex: 10,
         }}>
           <AnimatePresence mode="wait">
             {copied ? (
@@ -98,7 +81,7 @@ export function SocialGrid() {
                 exit={{ opacity: 0, y: -10 }}
                 style={{ display: 'flex', alignItems: 'center', gap: 6 }}
               >
-                <Check size={16} /> Copied
+                <Check size={14} /> Copied
               </motion.span>
             ) : (
               <motion.span
@@ -108,11 +91,53 @@ export function SocialGrid() {
                 exit={{ opacity: 0, y: -10 }}
                 style={{ display: 'flex', alignItems: 'center', gap: 6 }}
               >
-                <Copy size={16} /> Copy
+                <Copy size={14} /> Copy
               </motion.span>
             )}
           </AnimatePresence>
         </div>
+
+        {/* Row 1: Icon + Label */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div
+            style={{
+              width: 48,
+              height: 48,
+              borderRadius: 12,
+              background: 'rgba(167, 139, 250, 0.1)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#a78bfa',
+              flexShrink: 0,
+            }}
+          >
+            <Mail size={20} />
+          </div>
+
+          <h3 style={{ 
+            fontSize: 13, 
+            fontWeight: 600, 
+            color: '#a78bfa', 
+            textTransform: 'uppercase', 
+            letterSpacing: '0.05em',
+          }}>
+            Drop me an email
+          </h3>
+        </div>
+
+        {/* Row 2: Email Address - Full Width */}
+        <p style={{ 
+          fontSize: 'clamp(18px, 2vw, 22px)',
+          fontWeight: 600, 
+          color: '#fff', 
+          fontFamily: "'Outfit', system-ui, sans-serif",
+          lineHeight: 1.3,
+          wordBreak: 'break-word',
+          paddingRight: 8,
+        }}>
+          tanmayshukla126@gmail.com
+        </p>
       </GlowCard>
 
       {/* Social Links Row using GlassIcons for 3D effect */}
