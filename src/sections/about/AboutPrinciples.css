@@ -1,0 +1,17 @@
+/* CSS adjustments for single icon usage in Principles section */
+.principle-glass-icon-wrapper .icon-btns {
+    display: block !important; /* Override grid */
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.principle-glass-icon-wrapper .icon-btn {
+    width: 4em;
+    height: 4em;
+    font-size: 14px; /* Scale control */
+}
+
+/* Hide label for purely decorative usage if empty */
+.principle-glass-icon-wrapper .icon-btn__label {
+    display: none;
+}
