@@ -316,6 +316,20 @@ export function DomeGallery({
         if (focusedElRef.current || !draggingRef.current || !startPosRef.current) return;
 
         const evt = event as PointerEvent;
+        
+        // Mobile-only: detect swipe direction to allow vertical page scroll
+        if (evt.pointerType === 'touch') {
+          const deltaX = Math.abs(movement[0]);
+          const deltaY = Math.abs(movement[1]);
+          
+          // If primarily vertical movement (threshold 1.5x), allow native scroll
+          if (deltaY > deltaX * 1.5) {
+            // Don't capture - let page scroll
+            draggingRef.current = false;
+            return;
+          }
+        }
+
         const dxTotal = evt.clientX - startPosRef.current.x;
         const dyTotal = evt.clientY - startPosRef.current.y;
 

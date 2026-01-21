@@ -208,6 +208,7 @@ export function DynamicIsland() {
         x: '-50%', // Centered via static transform for stability
         y: smoothY,
       }}
+      className="max-w-[calc(100vw-2rem)] md:max-w-none top-3 md:top-6"
       initial={{ y: -100, opacity: 0, x: '-50%' }}
       animate={{ y: 0, opacity: 1, x: '-50%' }}
       transition={{ delay: 0.3, ...springs.bouncy }}
