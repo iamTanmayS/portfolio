@@ -7,5 +7,7 @@ export { DomeGallery } from './DomeGallery';
 export { GlassIcons } from './GlassIcons';
 export { Timeline } from './Timeline';
 export { GlowCard } from './GlowCard';
+export { MusicPlayer } from './MusicPlayer';
+
 
 

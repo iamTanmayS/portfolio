@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Github, Linkedin, Twitter, Copy, Check } from 'lucide-react';
+import { Mail, Github, Linkedin, Twitter, Code2, Copy, Check } from 'lucide-react';
 import { useCursorHandlers } from '../../components/cursor/CustomCursor';
 import { copyToClipboard } from '../../utils/clipboard';
 import { springs, staggerContainer, staggerItem } from '../../animations';
@@ -8,9 +8,10 @@ import { GlassIcons } from '../../components/ui/GlassIcons';
 import { GlowCard } from '../../components/ui/GlowCard';
 
 const socialLinks = [
-  { name: 'GitHub', url: 'https://github.com', icon: Github, color: '#fff' },
-  { name: 'LinkedIn', url: 'https://linkedin.com', icon: Linkedin, color: '#0077b5' },
-  { name: 'Twitter', url: 'https://twitter.com', icon: Twitter, color: '#1da1f2' },
+  { name: 'GitHub', url: 'https://github.com/iamTanmayS', icon: Github, color: '#fff' },
+  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/tanmayshukla1/', icon: Linkedin, color: '#0077b5' },
+  { name: 'Twitter', url: 'https://x.com/tanmayshuklaa/', icon: Twitter, color: '#1da1f2' },
+  { name: 'LeetCode', url: 'https://leetcode.com/u/tanmay126/', icon: Code2, color: '#ffa116' },
 ];
 
 export function SocialGrid() {
@@ -18,7 +19,7 @@ export function SocialGrid() {
   const cursorHandlers = useCursorHandlers('button');
 
   const handleCopyEmail = async () => {
-    const success = await copyToClipboard('hello@example.com');
+    const success = await copyToClipboard('tanmayshukla126@gmail.com');
     if (success) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -144,7 +145,9 @@ export function SocialGrid() {
       <GlassIcons 
         items={socialLinks.map(link => ({
           icon: <link.icon size={14} />,
-          color: link.color === '#fff' ? 'purple' : link.color === '#0077b5' ? 'blue' : 'cyan', // Map to available gradients
+          color: link.color === '#fff' ? 'purple' : 
+                 link.color === '#0077b5' ? 'blue' : 
+                 link.color === '#ffa116' ? 'orange' : 'cyan',
           label: link.name,
           href: link.url
         }))}

@@ -3,6 +3,7 @@ import type { ReactNode, MouseEvent as ReactMouseEvent } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useCursorHandlers } from '../cursor/CustomCursor';
 import { useMotion } from '../../context/AppContext';
+import { useSound } from '../../context/SoundProvider';
 import { springs } from '../../animations';
 
 // ================================
@@ -50,6 +51,7 @@ export function Button({
 }: ButtonProps) {
   const cursorHandlers = useCursorHandlers('button');
   const { prefersReducedMotion } = useMotion();
+  const { playSound } = useSound();
   const buttonRef = useRef<HTMLButtonElement>(null);
   
   // Ripple state
@@ -99,6 +101,9 @@ export function Button({
   // Ripple effect on click
   const handleClick = (e: ReactMouseEvent<HTMLButtonElement>) => {
     if (disabled) return;
+    
+    // Play click sound
+    playSound('click');
     
     // Create ripple
     if (!prefersReducedMotion && buttonRef.current) {

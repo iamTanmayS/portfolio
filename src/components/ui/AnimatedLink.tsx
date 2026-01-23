@@ -1,6 +1,7 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { useCursorHandlers } from '../cursor/CustomCursor';
+import { useSound } from '../../context/SoundProvider';
 
 interface AnimatedLinkProps {
   href: string;
@@ -25,6 +26,7 @@ export function AnimatedLink({
   underlineColor = 'purple',
 }: AnimatedLinkProps) {
   const cursorHandlers = useCursorHandlers('link');
+  const { playSound } = useSound();
 
   return (
     <motion.a
@@ -40,6 +42,8 @@ export function AnimatedLink({
       `}
       whileHover={{ x: 2 }}
       whileTap={{ scale: 0.98 }}
+      onMouseEnter={() => playSound('hover')}
+      onClick={() => playSound('click')}
       {...cursorHandlers}
     >
       <span className="relative">

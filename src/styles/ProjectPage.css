@@ -29,7 +29,13 @@
 
 @media (min-width: 768px) {
   .project-shell {
-    padding: 0 64px;
+    padding: 0 80px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .project-shell {
+    padding: 0 96px;
   }
 }
 

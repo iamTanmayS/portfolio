@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useNav, useCursor, useMotion } from '../../context/AppContext';
 import { useCursorHandlers } from '../cursor/CustomCursor';
+import { useSound } from '../../context/SoundProvider';
 import { springs, navbarVariants } from '../../animations';
 
 // ================================
@@ -17,9 +18,11 @@ interface NavLinkProps {
 
 function NavLink({ href, label, isActive, onClick, index }: NavLinkProps) {
   const cursorHandlers = useCursorHandlers('link');
+  const { playSound } = useSound();
   
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
+    playSound('click');
     const element = document.getElementById(href.replace('#', ''));
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -79,6 +82,7 @@ export function DynamicIsland() {
   const { isNavExpanded, setNavExpanded, activeSection, sections } = useNav();
   const { cursor, isTouchDevice } = useCursor();
   const { prefersReducedMotion } = useMotion();
+  const { playSound } = useSound();
   const cursorHandlers = useCursorHandlers('button');
   
   const location = useLocation();
@@ -162,7 +166,10 @@ export function DynamicIsland() {
   // ================================
   // Handlers
   // ================================
-  const handleToggle = () => setNavExpanded(!isNavExpanded);
+  const handleToggle = () => {
+    playSound('click');
+    setNavExpanded(!isNavExpanded);
+  };
   
   const handleNavClick = (sectionId: string) => {
     setNavExpanded(false);

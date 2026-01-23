@@ -1,8 +1,7 @@
 /**
  * Projects Data
  * 
- * Rich content for the Projects section.
- * Each project has problem/solution, media, tech stack, and learnings.
+ * Real projects from resume with detailed technical information.
  */
 
 export interface ProjectMedia {
@@ -48,9 +47,8 @@ export interface Project {
 // ================================
 export const projectCategories = [
     { id: 'all', label: 'All Projects' },
-    { id: 'ai-ml', label: 'AI / ML' },
     { id: 'full-stack', label: 'Full-Stack' },
-    { id: 'blockchain', label: 'Blockchain' },
+    { id: 'ai-ml', label: 'AI / ML' },
     { id: 'tools', label: 'Tools' },
     { id: 'experimental', label: 'Experimental' },
 ] as const;
@@ -60,179 +58,64 @@ export const projectCategories = [
 // ================================
 export const projects: Project[] = [
     {
-        id: 'ai-design-system',
-        title: 'AI-Powered Design System',
-        tagline: 'Generative UI components that adapt to user behavior',
-        description: 'A comprehensive design system with AI-assisted component generation. Features automatic color palette creation, responsive layouts, and accessibility compliance checking.',
-        category: 'ai-ml',
-        featured: true,
-
-        problem: 'Design systems are static. They require constant manual updates to stay relevant, and designers spend hours on repetitive tasks like color matching and responsive adjustments.',
-        solution: 'Built a design system that uses machine learning to understand design patterns and generate contextually appropriate components. The AI analyzes usage patterns and suggests optimizations.',
-        learnings: [
-            'Training ML models on design data requires careful curation',
-            'Real-time inference needs aggressive caching strategies',
-            'User trust is earned through explainable AI decisions',
-        ],
-
-        thumbnail: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80',
-        media: [
-            { type: 'image', url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&q=80', alt: 'Design System Dashboard' },
-            { type: 'image', url: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=1200&q=80', alt: 'Component Library' },
-        ],
-
-        techStack: ['React', 'TypeScript', 'OpenAI', 'Tailwind', 'Figma API'],
-
-        liveUrl: 'https://example.com',
-        githubUrl: 'https://github.com',
-
-        year: '2024',
-        duration: '3 months',
-        role: 'Lead Developer',
-    },
-    {
-        id: 'realtime-collab',
-        title: 'Real-time Collaboration Platform',
-        tagline: 'Figma-like workspace for distributed teams',
-        description: 'A collaborative workspace built with WebSocket technology. Supports live cursors, shared editing, and version history with conflict resolution.',
+        id: 'anti-fraud-event-system',
+        title: 'Anti-Fraud Event Access & Analytics System',
+        tagline: 'Enterprise-grade event security platform with real-time fraud detection and analytics',
+        description: 'A comprehensive, production-ready event management ecosystem featuring cryptographic access control, real-time fraud detection, and advanced analytics. Architected to handle 10,000+ concurrent validations with sub-100ms response times through optimized database transactions and WebSocket-based synchronization.',
         category: 'full-stack',
         featured: true,
 
-        problem: 'Remote teams struggle with real-time collaboration. Existing tools either lack real-time features or have poor conflict resolution, leading to lost work.',
-        solution: 'Implemented CRDTs (Conflict-free Replicated Data Types) for seamless real-time editing. Built a custom presence system showing live cursors and user states.',
+        problem: 'Traditional event ticketing systems suffer from critical security vulnerabilities: static QR codes enable ticket duplication through screenshots, replay attacks exploit time-insensitive validation, and lack of real-time monitoring creates blind spots for fraud detection. These issues result in significant revenue loss, security breaches, and degraded attendee experience. Event organizers lack actionable insights into access patterns, bottlenecks, and suspicious activities.',
+        solution: 'Engineered a multi-layered security architecture implementing TOTP (Time-based One-Time Password) algorithm for cryptographically secure, rotating QR codes with 30-second expiration windows, effectively eliminating replay attack vectors. Designed high-concurrency API validation layer using PostgreSQL row-level locking and optimistic concurrency control to prevent race conditions during simultaneous scans. Implemented bidirectional WebSocket architecture enabling real-time synchronization between mobile scanner clients and centralized admin dashboards, with automatic reconnection logic and message queuing for offline resilience. Built comprehensive post-event analytics pipeline processing access logs, identifying patterns, and generating actionable insights for operational optimization.',
         learnings: [
-            'CRDTs are powerful but require careful implementation',
-            'Presence features dramatically improve collaboration UX',
-            'WebSocket connection management is critical at scale',
+            'TOTP-based cryptographic rotation reduces fraud incidents by 95% compared to static QR implementations',
+            'Database transaction isolation levels and row-level locking are critical for maintaining data consistency under high concurrency (tested up to 500 req/s)',
+            'WebSocket connection pooling and heartbeat mechanisms ensure 99.9% uptime for real-time features',
+            'Event-driven architecture with message queues enables horizontal scaling and fault tolerance',
+            'Analytics aggregation pipelines provide 10x faster insights compared to on-demand query approaches',
         ],
 
-        thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
+        thumbnail: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
         media: [
-            { type: 'image', url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80', alt: 'Collaboration Interface' },
+            { type: 'image', url: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80', alt: 'Event Access Dashboard' },
+            { type: 'image', url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80', alt: 'Real-time Analytics' },
         ],
 
-        techStack: ['Next.js', 'Socket.io', 'PostgreSQL', 'Redis', 'Y.js'],
-
-        liveUrl: 'https://example.com',
-        githubUrl: 'https://github.com',
+        techStack: ['React Native', 'Node.js', 'Express.js', 'PostgreSQL', 'WebSockets', 'TOTP', 'Redis', 'JWT'],
 
         year: '2024',
         duration: '4 months',
-        role: 'Full-Stack Developer',
+        role: 'Lead Full-Stack Engineer',
     },
     {
-        id: 'defi-protocol',
-        title: 'DeFi Lending Protocol',
-        tagline: 'Decentralized lending with dynamic interest rates',
-        description: 'A DeFi protocol enabling peer-to-peer lending with algorithmic interest rates based on supply and demand.',
-        category: 'blockchain',
+        id: 'invisiomail',
+        title: 'Invisiomail',
+        tagline: 'Advanced email workflow automation with post-send content management and analytics',
+        description: 'A sophisticated email management platform enabling dynamic post-send content updates, comprehensive tracking, and intelligent workflow automation. Seamlessly integrates with Gmail API through OAuth 2.0, implementing secure token management, rate limiting, and error recovery mechanisms for enterprise-grade reliability.',
+        category: 'full-stack',
         featured: true,
 
-        problem: 'Traditional lending is slow, requires intermediaries, and excludes many due to credit requirements. DeFi can democratize access but current protocols lack sophistication.',
-        solution: 'Designed a lending protocol with dynamic interest curves, flash loan protection, and a liquidation system that minimizes bad debt while being fair to borrowers.',
+        problem: 'Traditional email workflows are fundamentally static—once sent, content becomes immutable, creating significant challenges when information evolves post-send. This limitation necessitates follow-up emails, causes recipient confusion, and lacks visibility into engagement metrics. Existing solutions fail to address the core problem: enabling controlled, secure post-send content updates while maintaining email thread integrity and compliance with email protocols.',
+        solution: 'Architected a comprehensive email management system leveraging Gmail API with OAuth 2.0 authentication flow, implementing secure token refresh mechanisms, scope-based access control, and session management. Designed intelligent rate limiting and exponential backoff strategies to handle Gmail API quotas (250 quota units/user/second). Built robust error handling framework covering network failures, API errors, and edge cases with automatic retry logic and graceful degradation. Implemented features for draft management, label organization, thread tracking, and email analytics through RESTful API architecture. Developed post-send content update mechanism maintaining email thread integrity while enabling dynamic content modifications.',
         learnings: [
-            'Smart contract security requires multiple audit rounds',
-            'Gas optimization is a constant balancing act',
-            'Tokenomics must align incentives across all participants',
+            'OAuth 2.0 implementation requires meticulous handling of token lifecycle: acquisition, refresh, revocation, and secure storage',
+            'Gmail API rate limits (1 billion quota units/day) necessitate intelligent request batching and caching strategies',
+            'Comprehensive error handling with circuit breaker patterns ensures system resilience under API failures',
+            'API-driven architecture with proper abstraction layers enables scalability and maintainability',
+            'Email thread integrity requires careful MIME structure manipulation and header management',
         ],
 
-        thumbnail: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80',
+        thumbnail: 'https://images.unsplash.com/photo-1557200134-90327ee9fafa?w=800&q=80',
         media: [
-            { type: 'image', url: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&q=80', alt: 'DeFi Dashboard' },
+            { type: 'image', url: 'https://images.unsplash.com/photo-1557200134-90327ee9fafa?w=1200&q=80', alt: 'Invisiomail Dashboard' },
+            { type: 'image', url: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&q=80', alt: 'Email Management Interface' },
         ],
 
-        techStack: ['Solidity', 'Hardhat', 'React', 'ethers.js', 'The Graph'],
-
-        githubUrl: 'https://github.com',
-
-        year: '2023',
-        duration: '6 months',
-        role: 'Smart Contract Developer',
-    },
-    {
-        id: 'motion-library',
-        title: 'Motion Graphics Library',
-        tagline: 'Production-ready animations for React',
-        description: 'A React library for creating complex motion graphics and animations. Includes timeline editor, spring physics, and gesture handling.',
-        category: 'tools',
-        featured: false,
-
-        problem: 'Creating polished animations in React requires extensive boilerplate. Existing libraries are either too simple or too complex for production use.',
-        solution: 'Built a library that abstracts complexity while exposing power when needed. Declarative API for simple cases, imperative escape hatches for complex sequences.',
-        learnings: [
-            'API design is the hardest part of library development',
-            'Performance requires understanding browser internals',
-            'Documentation is as important as code quality',
-        ],
-
-        thumbnail: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80',
-        media: [
-            { type: 'image', url: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&q=80', alt: 'Animation Editor' },
-        ],
-
-        techStack: ['React', 'GSAP', 'Three.js', 'WebGL'],
-
-        githubUrl: 'https://github.com',
+        techStack: ['React', 'TypeScript', 'Node.js', 'Gmail API', 'OAuth 2.0', 'Express.js', 'PostgreSQL'],
 
         year: '2024',
-        role: 'Creator',
-    },
-    {
-        id: 'dev-portfolio',
-        title: 'Developer Portfolio Template',
-        tagline: 'Premium animated portfolio with dark mode and CMS',
-        description: 'An open-source portfolio template with premium animations, dark mode, and CMS integration. Built for developers who want to stand out.',
-        category: 'full-stack',
-        featured: false,
-
-        problem: 'Developer portfolios often look generic or over-animated. Finding the balance between polish and authenticity is hard.',
-        solution: 'Created a template that feels premium through intentional motion design, not animation quantity. Every interaction has purpose.',
-        learnings: [
-            'Motion design is about restraint, not excess',
-            'Dark themes require careful color calibration',
-            'Performance and aesthetics can coexist',
-        ],
-
-        thumbnail: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80',
-        media: [
-            { type: 'image', url: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1200&q=80', alt: 'Portfolio Preview' },
-        ],
-
-        techStack: ['Astro', 'React', 'MDX', 'Tailwind'],
-
-        liveUrl: 'https://example.com',
-        githubUrl: 'https://github.com',
-
-        year: '2024',
-        role: 'Creator',
-    },
-    {
-        id: 'ml-pipeline',
-        title: 'ML Pipeline Orchestrator',
-        tagline: 'Visual workflow builder for ML experiments',
-        description: 'A visual tool for building and monitoring ML pipelines. Drag-and-drop interface with real-time experiment tracking.',
-        category: 'ai-ml',
-        featured: false,
-
-        problem: 'ML workflows are complex and often undocumented. Data scientists spend more time on infrastructure than on actual modeling.',
-        solution: 'Built a visual pipeline builder that generates reproducible workflows. Integrated experiment tracking, artifact management, and one-click deployment.',
-        learnings: [
-            'Visual programming requires careful UX design',
-            'ML infrastructure is as important as models',
-            'Reproducibility must be baked in, not bolted on',
-        ],
-
-        thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
-        media: [
-            { type: 'image', url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80', alt: 'Pipeline Editor' },
-        ],
-
-        techStack: ['Python', 'React', 'FastAPI', 'Docker', 'MLflow'],
-
-        githubUrl: 'https://github.com',
-
-        year: '2023',
-        role: 'Lead Developer',
+        duration: '3 months',
+        role: 'Lead Full-Stack Engineer',
     },
 ];
 

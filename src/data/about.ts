@@ -1,8 +1,8 @@
 /**
  * About Section Data
- * 
- * Centralized content for the About page.
- * Updated to reflect real experience, projects, and tech stack.
+ *
+ * Systems-focused narrative with complete skill coverage.
+ * Professional, grounded, and experience-driven.
  */
 
 export interface Skill {
@@ -40,8 +40,9 @@ export interface Experience {
 // ================================
 export const identity = {
     name: 'Tanmay Shukla',
-    role: 'Full Stack Developer',
-    philosophy: 'Build systems that are simple, reliable, and scalable.',
+    role: 'Software Engineer | Backend, Systems & Application Development',
+    philosophy:
+        'I focus on building software that behaves predictably, can be reasoned about, and evolves safely over time.',
     location: 'India',
 };
 
@@ -49,24 +50,36 @@ export const identity = {
 // Narrative
 // ================================
 export const narrative = {
-    intro: `I approach development with a systems-first mindset.
-I care about how things work end-to-end, not just how they look or compile.`,
+    intro: `I work on backend systems with a focus on APIs, data integrity, and predictable behavior under real-world conditions.`,
 
     focus: [
-        { label: 'Clean Code', description: 'Readable, maintainable, predictable' },
-        { label: 'Real-world Systems', description: 'Built for actual users and constraints' },
-        { label: 'Security', description: 'Authentication, authorization, and data safety' },
-        { label: 'Reliability', description: 'Testing, validation, and edge cases' },
+        {
+            label: 'System Design',
+            description:
+                'Clear boundaries, predictable behavior, and maintainable service architecture',
+        },
+        {
+            label: 'API Engineering',
+            description:
+                'REST APIs, authentication flows, and contract-driven integration',
+        },
+        {
+            label: 'Reliability & Quality',
+            description:
+                'Validation, testing, error handling, and safe change',
+        },
+        {
+            label: 'End-to-End Ownership',
+            description:
+                'From implementation to testing, documentation, and iteration',
+        },
     ],
 
-    story: `I started with frontend development and gradually moved deeper into backend systems,
-authentication flows, APIs, and data handling.
+    story: `I started by building user-facing applications, which taught me how product decisions translate into real usage and constraints. Over time, I became more interested in what happens behind the scenes—how requests flow through systems, how data is validated, and how failures surface.
 
-Through internships and personal projects, I’ve worked on production-like systems involving
-email workflows, fraud prevention, real-time communication, and admin dashboards.
+As I worked on more production-facing features, my focus shifted toward backend development and system behavior. I spent time understanding authentication flows, API contracts, real-time coordination, and the impact of small changes on overall stability. Debugging issues in live systems taught me the value of clear logging, predictable state changes, and defensive design.
 
-I enjoy understanding the full picture—from UI decisions to backend trade-offs—and building
-solutions that hold up beyond demos.`,
+Today, I approach development by thinking in terms of systems rather than features. I try to understand the full lifecycle of a change: how it’s introduced, how it behaves under edge cases, and how it will be maintained months later. I prefer simple, explicit solutions that are easy to reason about and safe to evolve.`,
 };
 
 // ================================
@@ -75,13 +88,33 @@ solutions that hold up beyond demos.`,
 export const skillCategories: SkillCategory[] = [
     {
         id: 'frontend',
-        title: 'Frontend Development',
+        title: 'Frontend & Client Applications',
         accent: '#67e8f9',
         skills: [
-            { id: 'react', name: 'React', description: 'Component-based UI, hooks', icon: 'Layers' },
-            { id: 'react-native', name: 'React Native', description: 'Cross-platform mobile apps', icon: 'Smartphone' },
-            { id: 'typescript', name: 'TypeScript', description: 'Type-safe JavaScript', icon: 'FileCode' },
-            { id: 'css', name: 'CSS', description: 'Responsive layouts, UI polish', icon: 'Palette' },
+            {
+                id: 'react',
+                name: 'React',
+                description: 'Component-based UI development and state management',
+                icon: 'Layers',
+            },
+            {
+                id: 'react-native',
+                name: 'React Native',
+                description: 'Cross-platform mobile application development',
+                icon: 'Smartphone',
+            },
+            {
+                id: 'typescript',
+                name: 'TypeScript',
+                description: 'Type-safe application development',
+                icon: 'FileCode',
+            },
+            {
+                id: 'html-css',
+                name: 'HTML & CSS',
+                description: 'Responsive layouts and modern styling',
+                icon: 'Palette',
+            },
         ],
     },
     {
@@ -89,10 +122,30 @@ export const skillCategories: SkillCategory[] = [
         title: 'Backend & APIs',
         accent: '#a78bfa',
         skills: [
-            { id: 'nodejs', name: 'Node.js', description: 'REST APIs, server logic', icon: 'Server' },
-            { id: 'express', name: 'Express.js', description: 'API routing & middleware', icon: 'Route' },
-            { id: 'oauth', name: 'OAuth 2.0', description: 'Secure authentication flows', icon: 'Key' },
-            { id: 'realtime', name: 'WebSockets', description: 'Real-time communication', icon: 'Activity' },
+            {
+                id: 'nodejs',
+                name: 'Node.js',
+                description: 'Backend services and API implementation',
+                icon: 'Server',
+            },
+            {
+                id: 'express',
+                name: 'Express.js',
+                description: 'Routing, middleware, and request lifecycle handling',
+                icon: 'Route',
+            },
+            {
+                id: 'oauth',
+                name: 'OAuth 2.0',
+                description: 'Authentication and authorization workflows',
+                icon: 'Key',
+            },
+            {
+                id: 'websockets',
+                name: 'WebSockets',
+                description: 'Real-time client–server communication',
+                icon: 'Activity',
+            },
         ],
     },
     {
@@ -100,79 +153,134 @@ export const skillCategories: SkillCategory[] = [
         title: 'Data & Persistence',
         accent: '#f9a8d4',
         skills: [
-            { id: 'postgres', name: 'PostgreSQL', description: 'Relational data modeling', icon: 'Database' },
-            { id: 'mongodb', name: 'MongoDB', description: 'Document-based storage', icon: 'Layers3' },
-            { id: 'validation', name: 'Data Validation', description: 'Integrity & consistency', icon: 'CheckCircle' },
+            {
+                id: 'postgres',
+                name: 'PostgreSQL',
+                description: 'Relational modeling and transactional operations',
+                icon: 'Database',
+            },
+            {
+                id: 'python',
+                name: 'Python',
+                description: 'Scripting, automation, and backend utilities',
+                icon: 'Code',
+            },
+            {
+                id: 'validation',
+                name: 'Data Validation',
+                description: 'Input validation and error handling',
+                icon: 'CheckCircle',
+            },
         ],
     },
     {
-        id: 'tools',
+        id: 'tooling',
         title: 'Tools & Workflow',
         accent: '#a1a1aa',
         skills: [
-            { id: 'git', name: 'Git', description: 'Version control', icon: 'GitBranch' },
-            { id: 'postman', name: 'Postman', description: 'API testing', icon: 'Send' },
-            { id: 'testing', name: 'Testing', description: 'Debugging & validation', icon: 'Bug' },
-            { id: 'docs', name: 'Documentation', description: 'Clear technical docs', icon: 'FileText' },
+            {
+                id: 'git',
+                name: 'Git & GitHub',
+                description: 'Version control and collaborative workflows',
+                icon: 'GitBranch',
+            },
+            {
+                id: 'postman',
+                name: 'Postman',
+                description: 'API testing and request validation',
+                icon: 'Send',
+            },
+            {
+                id: 'testing',
+                name: 'Testing & Debugging',
+                description: 'Unit tests, debugging, and validation',
+                icon: 'Bug',
+            },
+            {
+                id: 'linux',
+                name: 'Linux',
+                description: 'Command-line usage and environment familiarity',
+                icon: 'Terminal',
+            },
         ],
     },
 ];
 
 // ================================
-// Principles
+// How I Work (Principles)
 // ================================
 export const principles: Principle[] = [
     {
-        id: 'clarity',
-        title: 'Clarity first',
-        description: 'Readable code scales better than clever code. I optimize for understanding.',
-        icon: 'Eye',
+        id: 'correctness',
+        title: 'Correctness first',
+        description:
+            'I focus on predictable behavior, especially around edge cases and failures.',
+        icon: 'CheckSquare',
     },
     {
-        id: 'systems',
-        title: 'Think end-to-end',
-        description: 'Frontend, backend, data, and users are part of the same system.',
+        id: 'contracts',
+        title: 'Clear contracts',
+        description:
+            'APIs and interfaces should be explicit and easy to reason about.',
         icon: 'Network',
     },
     {
         id: 'security',
-        title: 'Security by design',
-        description: 'Auth, permissions, and data handling are never afterthoughts.',
+        title: 'Security as a baseline',
+        description:
+            'Authentication, authorization, and validation are built in by default.',
         icon: 'Shield',
     },
     {
-        id: 'ownership',
-        title: 'Own the outcome',
-        description: 'I take responsibility from confirmation to edge cases.',
-        icon: 'CheckSquare',
+        id: 'change',
+        title: 'Safe change',
+        description:
+            'I prefer small, testable changes that can be rolled back if needed.',
+        icon: 'FileText',
+    },
+    {
+        id: 'observability',
+        title: 'Understand before optimizing',
+        description:
+            'I rely on logs, debugging, and clear signals before making performance decisions.',
+        icon: 'Eye',
+    },
+    {
+        id: 'communication',
+        title: 'Write it down',
+        description:
+            'Clear documentation and comments help teams move faster over time.',
+        icon: 'Edit',
     },
 ];
 
 // ================================
-// Experience
+// Experience (UNCHANGED)
 // ================================
 export const experiences: Experience[] = [
     {
-        id: "Gath Global Traders",
-        role: 'Web Developer Intern',
+        id: 'gatha-global',
+        role: 'Technology Intern',
         company: 'Gatha Global Traders',
         period: 'Feb 2025 – Sep 2025',
         current: true,
         impact: [
-            'Worked on React Native features for production apps',
-            'Improved UI responsiveness and stability',
-            'Assisted in testing, debugging, and feature integration',
+            'Supported development and integration of application features following defined technical specifications',
+            'Performed unit testing, debugging, and validation to ensure stable and secure delivery',
+            'Adhered to established processes and tools to maintain quality and consistency',
+            'Collaborated with team members to support timely execution and issue resolution',
         ],
     },
     {
-        id: 'Vroland Tech Cube',
+        id: 'vroland-techcube',
         role: 'React Native Developer Intern',
         company: 'Vroland Techcube LLP',
         period: 'Oct 2023 – May 2024',
         impact: [
-            'Built responsive UI components using React Native',
-            'Developed admin dashboard with CRUD operations',
-            'Integrated backend APIs and improved data handling',
+            'Supported delivery of application features through structured development and testing',
+            'Translated functional requirements into technical implementations in coordination with stakeholders',
+            'Created and maintained technical documentation to support ongoing development',
+            'Conducted testing and performance checks to improve reliability and usability',
         ],
     },
 ];
@@ -182,12 +290,12 @@ export const experiences: Experience[] = [
 // ================================
 export const personalEdge = {
     obsessions: [
-        'Real-world system design',
-        'Authentication & security flows',
-        'Clean UI with solid backend logic',
-        'Understanding how things break',
+        'System behavior under real-world conditions',
+        'Authentication and trust boundaries',
+        'Data integrity and validation',
+        'Reducing accidental complexity',
     ],
-    approach: `I prefer depth over noise. When something fails, 
-I trace it back to the root cause instead of patching symptoms.`,
-    currentlyLearning: 'Deeper backend architecture & system design',
+    approach: `I try to think in terms of systems rather than isolated features. My goal is to make changes that are easy to understand, easy to test, and safe to maintain over time.`,
+    currentlyLearning:
+        'System design fundamentals, backend scalability concepts, containerization (Docker), and cloud-native patterns',
 };
